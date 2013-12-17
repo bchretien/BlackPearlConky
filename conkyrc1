@@ -9,7 +9,7 @@
 ##..: System Settings :..
 ##
   cpu_avg_samples 1                   #The number of samples to average for CPU monitoring
-  net_avg_samples 2                   #The number of samples to average for net data 
+  net_avg_samples 2                   #The number of samples to average for net data
 ##
 ##..: Memory :..
 ##
@@ -72,7 +72,7 @@
 ##..: Clock and rings :..
 ##-- SET TO YOUR PATH!!! --
 ##
-  lua_load ~/.conky-themes/BlackPearlConky/.conky/lua/clock2.lua
+  lua_load ~/.conky-themes/BlackPearlConky/lua/clock2.lua
   lua_draw_hook_pre clock_rings
 
 
@@ -80,14 +80,11 @@ TEXT
 ${color d7d7d7}${voffset 3}${cpugraph cpu6 1,300}${voffset 1}${cpugraph cpu6 17,1}${color3}
 #
 #..: NET & MAIL :..
-#-- CORRECT GMAIL SCRIPT TO YOUR PATH
-#--- if you use another client, use conkyEmail (uncomment #)
-${offset 10}${voffset -10}${font neuropol:size=20}  ${execpi 60 python2 ~/.conky-themes/scripts/mail/cache_gmail.py -n && ~/.conky-themes/scripts/mail/gmail_n.sh}${font Nimbus Mono L:size=8 style=bold}  mail(s)
-#${offset 10}  ${voffset -10}${font neuropol:size=20}  ${execi 300 conkyEmail --servertype=POP --servername=pop3.live.com --username=******** --password=******* --ssl}${font Nimbus Mono L:size=8 style=bold}  Gmail
+${offset 10}${voffset -10}${font neuropol:size=20}  ${texeci 300 python2 ~/.conky-themes/scripts/mail/cache_gmail.py -n && echo `~/.conky-themes/scripts/mail/gmail_new.sh`}${font Nimbus Mono L:size=8 style=bold}  mail(s)
 ${offset 20}${voffset -5}${cpubar cpu6 0, 110}${voffset 2}${color1}
-${offset 10}${if_up wlan0}${color2} WiFi       Online $else ${color3}WiFi   Offline $endif
-${offset 10}${if_up eth0}${color2} Ethernet   Online $else ${color3}Eth0   Offline $endif
-${offset 17}${if_up wlan0}WiFi       ${wireless_link_qual_perc wlan0}% $else ${color3}WiFi   Offline $endif
+${offset 10}${if_up eth0}${color2} Ethernet ${goto 90}Online $else ${color3}Ethernet ${goto 90}Offline $endif
+${offset 10}${if_up wlan0}${color2} WiFi ${goto 90}Online $else ${color3}WiFi ${goto 90}Offline $endif
+${offset 10}${if_up wlan0}   Signal  ${goto 90}${wireless_link_qual_perc wlan0}%$else$endif
 
 
 #..: NET TRAFFIC :..
@@ -103,29 +100,38 @@ ${color d7d7d7}${voffset 11}${cpugraph cpu6 1,150}${voffset 1}${cpugraph cpu6 17
 ${offset 40}${voffset -10}USB Devices
 ${offset 15}${voffset 7}${if_existing /dev/sdb1}${exec df -h | grep "sdb1" | cut -c48-70}   $else..:No Device:..$endif
 ${offset 15}${voffset 7}${if_existing /dev/sdb2}${exec df -h | grep "sdb2" | cut -c48-70}   $else..:No Device:..$endif
-${offset 15}${voffset 7}${if_existing /dev/sdc1}${exec df -h | grep "sdc1" | cut -c48-70}   $else..:No Device:..$endif 
+${offset 15}${voffset 7}${if_existing /dev/sdc1}${exec df -h | grep "sdc1" | cut -c48-70}   $else..:No Device:..$endif
 ${offset 15}${voffset 7}${if_existing /dev/sdd1}${exec df -h | grep "sdd1" | cut -c48-70}   $else $endif
-${offset 15}${voffset 7}${if_existing /dev/sde1}${exec df -h | grep "sde1" | cut -c48-70}   $else $endif  
+${offset 15}${voffset 7}${if_existing /dev/sde1}${exec df -h | grep "sde1" | cut -c48-70}   $else $endif
+
 #
 #..: MUSIC :..
 #-- SETTINGS FOR MPD --
 #--- if you use Exaile, uncomment commented section and comment mpd one ---
 #--- if you use other player, search setting on google :P ---
 ${color d7d7d7}${voffset -30}${cpugraph cpu6 1,300}${voffset 1}${cpugraph cpu6 17,1}${color3}
-${if_mpd_playing}${voffset -8}${offset 55}${voffset -2}${font neuropol:size=20}${mpd_elapsed}
-${offset 165}${voffset -27}${font neuropol:size=14}/ ${mpd_length}
-${offset 55}${color3}${cpubar cpu6 0, 190}${voffset 2}${font Nimbus Mono L:size=8 style=bold}
-${offset 55}${scroll 36 ${mpd_title}}
-${offset 55}${scroll 36 ${color 3273b5}${mpd_artist}}${color3}
-${offset 55}${scroll 36 ${mpd_album}}
-$else       ..:: MPD not running ::..
+#${if_mpd_playing}${voffset -8}${offset 55}${voffset -2}${font neuropol:size=20}${mpd_elapsed}
+#${offset 165}${voffset -27}${font neuropol:size=14}/ ${mpd_length}
+#${offset 55}${color3}${cpubar cpu6 0, 190}${voffset 2}${font Nimbus Mono L:size=8 style=bold}
+#${offset 55}${scroll 36 ${mpd_title}}
+#${offset 55}${scroll 36 ${color 3273b5}${mpd_artist}}${color3}
+#${offset 55}${scroll 36 ${mpd_album}}
+#$else       ..:: MPD not running ::..
 #${if_running exaile}${voffset -8}${offset 55}${voffset -2}${font neuropol:size=20} ${exec conkyExaile --datatype=PT} ${voffset -5}${font PizzaDude Bullets:size=10}BBBBB${offset -65}${color 0778ec}${exec conkyExaile -n --datatype=RT --ratingchar=D}$color
 #${offset 55}${color3}${cpubar cpu6 0, 190}${voffset 2}${font Nimbus Mono L:size=8 style=bold}
 #${offset 55}${scroll 36 ${exec conkyExaile --datatype=TI}}
 #${offset 55}${scroll 36 ${exec conkyExaile --datatype=AR}}
 #${offset 55}${scroll 36 ${exec conkyExaile --datatype=AL}}
 #${else}       ..:: Exaile not running ::..
-
+${if_existing /usr/bin/conkyClementine}
+${if_running clementine}
+${voffset -8}${goto 35}${voffset -2}${font neuropol:size=20}${exec conkyClementine --datatype=PT}${goto 120}/${goto 135}${exec conkyClementine --datatype=LE}
+${offset 30}${color3}${cpubar cpu6 0, 190}${voffset 2}
+${voffset -25}${offset 95}${font PizzaDude Bullets:size=10}BBBBB${offset -65}${color 0778ec}${exec conkyClementine -n --datatype=RT --ratingchar=D}$color${font Nimbus Mono L:size=8 style=bold}${voffset 10}
+${offset 30}${scroll 30 ${exec conkyClementine --datatype=TI}}
+${offset 30}${scroll 30 ${exec conkyClementine --datatype=AR}}
+${offset 30}${scroll 30 ${exec conkyClementine --datatype=AL}}
+$endif
 $endif
 
 

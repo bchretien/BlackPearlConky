@@ -77,9 +77,9 @@ settings_table = {
     end_angle=360
   },]]
  {
-        name='downspeedf',
-	arg='wlan0',
-	max=800,
+    name='downspeedf',
+    arg='eth0',
+    max=10000,
     bg_colour=0xffffff,
     bg_alpha=0.1,
     fg_colour=0xd7d7d7,
@@ -91,9 +91,9 @@ settings_table = {
     end_angle=360
   },
 {
-        name='upspeedf',
-	arg='wlan0',
-	max=500,
+    name='upspeedf',
+    arg='eth0',
+    max=2000,
     bg_colour=0xffffff,
     bg_alpha=0.1,
     fg_colour=0xd7d7d7,
@@ -104,57 +104,71 @@ settings_table = {
     start_angle=0,
     end_angle=360
   },
+--{
+    --name="fs_used_perc",
+    --arg="/media/STEELHDD",
+    --max=100,
+    --bg_colour=0xffffff,
+    --bg_alpha=0.1,
+    --fg_colour=0xd7d7d7,
+    --fg_alpha=0.6,
+    --x=155, y=292,
+    --radius=30,
+    --thickness=3,
+    --start_angle=0,
+    --end_angle=360
+  --},
+--{
+    --name="fs_used_perc",
+    --arg="/media/STEELHDD_LINUX",
+    --max=100,
+    --bg_colour=0xffffff,
+    --bg_alpha=0.1,
+    --fg_colour=0xd7d7d7,
+    --fg_alpha=0.6,
+    --x=155, y=292,
+    --radius=24,
+    --thickness=6,
+    --start_angle=0,
+    --end_angle=360
+  --},
+--{
+    --name="mpd_percent",
+    --arg="",
+    --max=100,
+    --bg_colour=0xffffff,
+    --bg_alpha=0.1,
+    --fg_colour=0xd7d7d7,
+    --fg_alpha=0.6,
+    --x=305, y=409,
+    --radius=43,
+    --thickness=3,
+    --start_angle=0,
+    --end_angle=360
+  --},
+--{
+    --name="mpd_vol",
+    --arg="",
+    --max=100,
+    --bg_colour=0xffffff,
+    --bg_alpha=0.0,
+    --fg_colour=0xd7d7d7,
+    --fg_alpha=0.6,
+    --x=305, y=409,
+    --radius=34,
+    --thickness=8,
+    --start_angle=0,
+    --end_angle=360
+  --},
 {
-    name="fs_used_perc",
-    arg="/media/STEELHDD",
+    name="exec conkyClementine",
+    arg="--datatype=VO",
     max=100,
     bg_colour=0xffffff,
     bg_alpha=0.1,
     fg_colour=0xd7d7d7,
     fg_alpha=0.6,
-    x=155, y=292,
-    radius=30,
-    thickness=3,
-    start_angle=0,
-    end_angle=360
-  },
-{
-    name="fs_used_perc",
-    arg="/media/STEELHDD_LINUX",
-    max=100,
-    bg_colour=0xffffff,
-    bg_alpha=0.1,
-    fg_colour=0xd7d7d7,
-    fg_alpha=0.6,
-    x=155, y=292,
-    radius=24,
-    thickness=6,
-    start_angle=0,
-    end_angle=360
-  },
-{
-    name="mpd_percent",
-    arg="",
-    max=100,
-    bg_colour=0xffffff,
-    bg_alpha=0.1,
-    fg_colour=0xd7d7d7,
-    fg_alpha=0.6,
-    x=305, y=409,
-    radius=43,
-    thickness=3,
-    start_angle=0,
-    end_angle=360
-  },
-{
-    name="mpd_vol",
-    arg="",
-    max=100,
-    bg_colour=0xffffff,
-    bg_alpha=0.0,
-    fg_colour=0xd7d7d7,
-    fg_alpha=0.6,
-    x=305, y=409,
+    x=305, y=404,
     radius=34,
     thickness=8,
     start_angle=0,
@@ -280,7 +294,7 @@ end
   if conky_window==nil then return end
   local cs=cairo_xlib_surface_create(conky_window.display,conky_window.drawable,conky_window.visual, conky_window.width,conky_window.height)
 
-  local cr=cairo_create(cs)  
+  local cr=cairo_create(cs)
 
   local updates=conky_parse('${updates}')
   update_num=tonumber(updates)

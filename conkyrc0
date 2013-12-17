@@ -86,6 +86,7 @@ ${offset 156}${font Nimbus Mono L:size=8 style=bold}${color2}${alignc}${exec dat
 ${color3}${execpi 60 JOUR=`date +%e`; cal | sed '1d' | sed 's/^/ /g' | sed /" $JOUR "/s/" $JOUR "/" "'${color 3273b5}'"$JOUR"'${color3}'" "/ | sed 's/^/\${offset 156}/' }
 
 
+
 #..: BATTERY :..
 ${color d7d7d7}${offset 100}${voffset -8}${cpugraph cpu6 17,1}${voffset -3}${hr 2}${color3}
 ${offset 150}${voffset -10} ${font neuropol:size=20}${battery_percent BAT1}%${font Nimbus Mono L:size=8 style=bold}  Battery
@@ -113,12 +114,4 @@ ${offset 170}/        ${goto 230}${fs_free /} / ${fs_size /}
 ${offset 170}/var     ${goto 230}${fs_free /var} / ${fs_size /var}
 ${offset 170}/home    ${goto 230}${fs_free /home} / ${fs_size /home}
 ${offset 170}Temp     ${goto 230}${execi 20 hddtemp /dev/sda | cut -d ':' -f 3}
-
-
-
-
-
-
-
-
 

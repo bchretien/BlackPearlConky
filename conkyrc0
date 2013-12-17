@@ -82,8 +82,8 @@ ${color d7d7d7}${offset 56}${voffset -1}${cpugraph cpu6 17,1}${voffset -3}${hr 2
 
 ${voffset -19}${offset 110}${font neuropol:size=20}${time %H:%M}${font}  ${voffset -3}${font Nimbus Mono L:size=9}$uptime
 ${voffset -5}${offset 110}${cpubar cpu6 0, 200}${voffset 2}${color1}
-${font Nimbus Mono L:size=8 style=bold}${color2}${alignc} ${exec date +%B\ %Y | sed 's/^.\| [a-z]/\U&/g'}
-${offset 156}${color3}${execpi 60 JOUR=`date +%e`; cal | sed '1d' | sed 's/^/ /g' | sed /" $JOUR "/s/" $JOUR "/" "'${color 3273b5}'"$JOUR"'${color3}'" "/}
+${offset 156}${font Nimbus Mono L:size=8 style=bold}${color2}${alignc}${exec date +%B\ %Y | sed 's/^.\| [a-z]/\U&/g'}
+${color3}${execpi 60 JOUR=`date +%e`; cal | sed '1d' | sed 's/^/ /g' | sed /" $JOUR "/s/" $JOUR "/" "'${color 3273b5}'"$JOUR"'${color3}'" "/ | sed 's/^/\${offset 156}/' }
 
 
 #..: BATTERY :..
@@ -97,22 +97,22 @@ ${battery_time BAT1}
 #--- if you use a multi-core system, change values ---
 #--- in this case, you may cange position of objects (offset, voffset) ---
 ${color d7d7d7}${offset 150}${voffset 3}${cpugraph cpu6 17,1}${voffset -3}${hr 2}${color3}
-${offset 200}${voffset -7}${font neuropol:size=20}${cpu cpu1}% ${font Nimbus Mono L:size=8 style=bold}Cpu
+${offset 200}${voffset -7}${font neuropol:size=20}${cpu cpu1}% ${font Nimbus Mono L:size=8 style=bold}CPU
 #${offset 200}${font neuropol:size=20}${cpu cpu2}% ${font Nimbus Mono L:size=8 style=bold}Cpu
 ${offset 200}${voffset -5}${cpubar cpu6 0, 110}${voffset 2}${color1}
-${offset 200}CpuT  ${execi 20 sensors | grep "high" | cut -d "+" -f2 | cut -c1-4 } °C
+${offset 200}CPU Temp ${execi 20 sensors | grep "Physical" | cut -d "+" -f2 | cut -c1-4 }°C
 #${offset 200}CpuT  ${execi 20 sensors | grep "100" | cut -d "+" -f2 | cut -c1-4 } °C
 
 
 #..: HARD DISK :..
 #--- correct to your partitions ---
 ${color d7d7d7}${offset 100}${voffset 36}${cpugraph cpu6 17,1}${voffset -3}${hr 2}${color3}
-${offset 170}${font neuropol:size=20}$memperc% ${font Nimbus Mono L:size=8 style=bold} Ram
+${offset 170}${font neuropol:size=20}$memperc% ${font Nimbus Mono L:size=8 style=bold} RAM
 ${offset 170}${voffset -5}${cpubar cpu6 0, 110}${voffset 2}${color1}
-${offset 170}root   ${fs_free /} / ${fs_size /}
-${offset 170}var    ${fs_free /var} / ${fs_size /var}
-${offset 170}home   ${fs_free /home} / ${fs_size /home}
-${offset 170}tHD    ${hddtemp /dev/sda | cut -d ':' -f 3}
+${offset 170}/        ${goto 230}${fs_free /} / ${fs_size /}
+${offset 170}/var     ${goto 230}${fs_free /var} / ${fs_size /var}
+${offset 170}/home    ${goto 230}${fs_free /home} / ${fs_size /home}
+${offset 170}Temp     ${goto 230}${execi 20 hddtemp /dev/sda | cut -d ':' -f 3}
 
 
 

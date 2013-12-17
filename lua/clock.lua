@@ -16,6 +16,9 @@ Changelog:
 + v1.0 -- Original release (30.09.2009)
 ]]
 
+-- TO BE CONFIGURED:
+BAT_ID='BAT1'
+
 settings_table = {
   --[[Anneau des heures
   {
@@ -92,7 +95,7 @@ settings_table = {
   },
   {
     name='battery_percent',
-    arg='BAT1',
+    arg=BAT_ID,
     max=100,
     bg_colour=0xffffff,
     bg_alpha=0.1,
@@ -106,7 +109,7 @@ settings_table = {
   },
 {
     name='cpu',
-    arg='cpu1',
+    arg='cpu0',
     max=100,
     bg_colour=0xffffff,
     bg_alpha=0.1,

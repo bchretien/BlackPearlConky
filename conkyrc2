@@ -67,7 +67,7 @@
 ##..: Draw a background :..
 ##-- SET TO YOUR PATH!!! --
 ##
-  lua_load /home/ninquitassar/.conky/lua/draw_bg.lua
+  lua_load ~/.conky-themes/BlackPearlConky/lua/draw_bg.lua
   lua_draw_hook_pre draw_bg
 ##
 ##..: Text of conky :..
@@ -86,4 +86,4 @@ ${color3}${alignc}${cpubar cpu6 0, 200}
 ##
 ##..: Backup status :..
 ##
-${color3}${alignc}${execpi 700 $HOME/.conky/scripts/backup_status}
+#${color3}${alignc}${execpi 700 $HOME/.conky-themes/BlackPearlConky/scripts/backup_status}

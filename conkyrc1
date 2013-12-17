@@ -72,7 +72,7 @@
 ##..: Clock and rings :..
 ##-- SET TO YOUR PATH!!! --
 ##
-  lua_load ~/.conky/lua/clock2.lua
+  lua_load ~/.conky-themes/BlackPearlConky/.conky/lua/clock2.lua
   lua_draw_hook_pre clock_rings
 
 
@@ -82,7 +82,7 @@ ${color d7d7d7}${voffset 3}${cpugraph cpu6 1,300}${voffset 1}${cpugraph cpu6 17,
 #..: NET & MAIL :..
 #-- CORRECT GMAIL SCRIPT TO YOUR PATH
 #--- if you use another client, use conkyEmail (uncomment #)
-${offset 10}${voffset -10}${font neuropol:size=20}  ${execpi 60 python ~/.conky/scripts/gmail.py}${font Nimbus Mono L:size=8 style=bold}  mail(s)
+${offset 10}${voffset -10}${font neuropol:size=20}  ${execpi 60 python2 ~/.conky-themes/scripts/mail/cache_gmail.py -n && ~/.conky-themes/scripts/mail/gmail_n.sh}${font Nimbus Mono L:size=8 style=bold}  mail(s)
 #${offset 10}  ${voffset -10}${font neuropol:size=20}  ${execi 300 conkyEmail --servertype=POP --servername=pop3.live.com --username=******** --password=******* --ssl}${font Nimbus Mono L:size=8 style=bold}  Gmail
 ${offset 20}${voffset -5}${cpubar cpu6 0, 110}${voffset 2}${color1}
 ${offset 10}${if_up wlan0}${color2} WiFi       Online $else ${color3}WiFi   Offline $endif

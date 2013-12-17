@@ -72,7 +72,7 @@
 ##..: Clock and rings :..
 ##-- SET TO YOUR PATH!!! --
 ##
-  lua_load ~/.conky/lua/clock.lua
+  lua_load ~/.conky-themes/BlackPearlConky/.conky/lua/clock.lua
   lua_draw_hook_pre clock_rings
 
 

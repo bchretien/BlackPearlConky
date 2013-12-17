@@ -2,9 +2,9 @@
 
 sleep 5
 
-conky -c ~/.conky/conkyrc0 &
-conky -c ~/.conky/conkyrc1 &
-conky -c ~/.conky/conkyrc2 &
- 
+conky -d -c ~/.conky-themes/BlackPearlConky/conkyrc0 &
+conky -d -c ~/.conky-themes/BlackPearlConky/conkyrc1 &
+conky -d -c ~/.conky-themes/BlackPearlConky/conkyrc2 &
+
 exit
 

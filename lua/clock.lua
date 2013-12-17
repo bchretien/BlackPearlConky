@@ -92,7 +92,7 @@ settings_table = {
   },
   {
     name='battery_percent',
-    arg='BAT0',
+    arg='BAT1',
     max=100,
     bg_colour=0xffffff,
     bg_alpha=0.1,
@@ -308,7 +308,7 @@ end
   if conky_window==nil then return end
   local cs=cairo_xlib_surface_create(conky_window.display,conky_window.drawable,conky_window.visual, conky_window.width,conky_window.height)
 
-  local cr=cairo_create(cs)  
+  local cr=cairo_create(cs)
 
   local updates=conky_parse('${updates}')
   update_num=tonumber(updates)

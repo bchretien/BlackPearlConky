@@ -9,7 +9,7 @@
 ##..: System Settings :..
 ##
   cpu_avg_samples 1                   #The number of samples to average for CPU monitoring
-  net_avg_samples 2                   #The number of samples to average for net data 
+  net_avg_samples 2                   #The number of samples to average for net data
 ##
 ##..: Memory :..
 ##
@@ -72,7 +72,7 @@
 ##..: Clock and rings :..
 ##-- SET TO YOUR PATH!!! --
 ##
-  lua_load ~/.conky-themes/BlackPearlConky/.conky/lua/clock.lua
+  lua_load ~/.conky-themes/BlackPearlConky/lua/clock.lua
   lua_draw_hook_pre clock_rings
 
 
@@ -88,17 +88,17 @@ ${offset 156}${color3}${execpi 60 JOUR=`date +%e`; cal | sed '1d' | sed 's/^/ /g
 
 #..: BATTERY :..
 ${color d7d7d7}${offset 100}${voffset -8}${cpugraph cpu6 17,1}${voffset -3}${hr 2}${color3}
-${offset 150}${voffset -10} ${font neuropol:size=20}${battery_percent BAT0}%${font Nimbus Mono L:size=8 style=bold}  Battery
+${offset 150}${voffset -10} ${font neuropol:size=20}${battery_percent BAT1}%${font Nimbus Mono L:size=8 style=bold}  Battery
 ${offset 160}${voffset -5}${cpubar cpu6 0, 150}${voffset 2}${color1}
-${offset 160}..:: ${acpiacadapter} ::..
-${battery_time BAT0}
+${offset 160}..:: ${acpiacadapter ACAD} ::..
+${battery_time BAT1}
 
 #..: CPU USAGE :..
 #--- if you use a multi-core system, change values ---
 #--- in this case, you may cange position of objects (offset, voffset) ---
 ${color d7d7d7}${offset 150}${voffset 3}${cpugraph cpu6 17,1}${voffset -3}${hr 2}${color3}
 ${offset 200}${voffset -7}${font neuropol:size=20}${cpu cpu1}% ${font Nimbus Mono L:size=8 style=bold}Cpu
-#${offset 200}${font neuropol:size=20}${cpu cpu2}% ${font Nimbus Mono L:size=8 style=bold}Cpu 
+#${offset 200}${font neuropol:size=20}${cpu cpu2}% ${font Nimbus Mono L:size=8 style=bold}Cpu
 ${offset 200}${voffset -5}${cpubar cpu6 0, 110}${voffset 2}${color1}
 ${offset 200}CpuT  ${execi 20 sensors | grep "high" | cut -d "+" -f2 | cut -c1-4 } °C
 #${offset 200}CpuT  ${execi 20 sensors | grep "100" | cut -d "+" -f2 | cut -c1-4 } °C
@@ -112,7 +112,7 @@ ${offset 170}${voffset -5}${cpubar cpu6 0, 110}${voffset 2}${color1}
 ${offset 170}root   ${fs_free /} / ${fs_size /}
 ${offset 170}var    ${fs_free /var} / ${fs_size /var}
 ${offset 170}home   ${fs_free /home} / ${fs_size /home}
-${offset 170}tHD    ${hddtemp /dev/sda}°C
+${offset 170}tHD    ${hddtemp /dev/sda | cut -d ':' -f 3}
 
 
 

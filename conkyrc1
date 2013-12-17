@@ -40,6 +40,7 @@
   own_window yes                      #Create own window to draw
   own_window_type override            #Type of window
   own_window_transparent yes          #Pseudo transparency
+  own_window_hints undecorated,below,skip_taskbar,skip_pager,sticky
 ##
 ##..: Format :..
 ##
@@ -82,9 +83,9 @@ ${color d7d7d7}${voffset 3}${cpugraph cpu6 1,300}${voffset 1}${cpugraph cpu6 17,
 #..: NET & MAIL :..
 ${offset 10}${voffset -10}${font neuropol:size=20}  ${texeci 300 python2 ~/.conky-themes/scripts/mail/cache_gmail.py -n && echo `~/.conky-themes/scripts/mail/gmail_new.sh`}${font Nimbus Mono L:size=8 style=bold}  mail(s)
 ${offset 20}${voffset -5}${cpubar cpu6 0, 110}${voffset 2}${color1}
-${offset 10}${if_up eth0}${color2} Ethernet ${goto 90}Online $else ${color3}Ethernet ${goto 90}Offline $endif
-${offset 10}${if_up wlan0}${color2} WiFi ${goto 90}Online $else ${color3}WiFi ${goto 90}Offline $endif
-${offset 10}${if_up wlan0}   Signal  ${goto 90}${wireless_link_qual_perc wlan0}%$else$endif
+${goto 14}${if_up eth0}${color2} Ethernet${goto 90}Online $else ${color3}Ethernet ${goto 90}Offline $endif
+${goto 14}${if_up wlan0}${color2}WiFi${goto 90}Online $else ${color3}WiFi ${goto 90}Offline $endif
+${goto 14}${if_up wlan0}   Signal  ${goto 90}${wireless_link_qual_perc wlan0}%$else$endif
 
 
 #..: NET TRAFFIC :..
@@ -92,7 +93,7 @@ ${color d7d7d7}${voffset 1}${cpugraph cpu6 1,200}${voffset 1}${cpugraph cpu6 17,
 ${offset 15}${if_up eth0}${voffset -5}Dw ${font neuropol:size=20} ${voffset -8}${downspeed eth0}$else ${font Nimbus Mono L:size=8 style=bold}${voffset -5}Dw ${font neuropol:size=20} ${voffset -8}${downspeed wlan0}$endif${font Nimbus Mono L:size=8 style=bold}
 ${offset 15}${if_up eth0}${voffset 6}Up ${font neuropol:size=20} ${voffset -7}${upspeed eth0}$else ${font Nimbus Mono L:size=8 style=bold}${voffset 6}Up ${font neuropol:size=20} ${voffset -7}${upspeed wlan0}$endif${font Nimbus Mono L:size=8 style=bold}
 ${offset 20}${voffset -1}${cpubar cpu6 0, 110}${voffset 2}${color1}
-${offset 15}${if_up ppp0} tDown   ${totaldown ppp0}$else tDown   ${totaldown wlan0}$endif
+${offset 15}${if_up eth0} tDown   ${totaldown eth0}$else${if_up wlan0} tDown   ${totaldown wlan0}$else$endif$endif
 #
 #..: USB DEVICES :..
 #-- set for your use --

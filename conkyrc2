@@ -1,0 +1,89 @@
+## Conky by Ninquitassar (2012)
+## my deviantart: http://ninquitassar.deviantart.com/
+##
+##..: Conky status :..
+##
+  total_run_times 0                   #Time in seconds; 0 = ever
+  background no                       #No fork in background
+##
+##..: Memory :..
+##
+  double_buffer yes                   #eliminates flicker
+  no_buffers yes                      #Subtract (file system) buffers from used memory?
+  text_buffer_size 1024               #Textual buffer memory
+##
+##..: Display :..
+  out_to_console no                   #Print text to stdout
+  update_interval 1                   #Update interval
+##
+##..: Conky Window :..
+##
+  alignment top_left                  #Alignement
+  #
+  minimum_size 350                    #Minimum width (px)
+  maximum_width 260                   #Maximum width (px)
+  #
+  gap_x 20                            #Gap between left/right border
+  gap_y 60                            #Gap between upper/lower border
+  #
+  draw_shades no                      #Draw shadows?
+  draw_outline no                     #Draw outline?
+  draw_borders no                     #Borders to the text?
+  border_width 1                      #Width of borders
+  border_inner_margin 1               #Width of margins
+  #
+  own_window yes                      #Create own window to draw
+  own_window_type override            #Type of window
+  own_window_transparent yes          #Enable pseudo-transparency
+##
+##..: Format :..
+##
+  use_xft yes                         #Use xft
+  xftalpha .1                         #Alpha of Xft
+  override_utf8_locale yes            #UTF8 forcing
+  uppercase no                        #Only capital letters
+  use_spacer left                     #Adds spaces around certain objects to stop them from moving other things around
+  #
+  xftfont saxMono:size=9              #Default font
+  #
+  default_bar_size 82 3               #Specify a default width and height for bars
+  stippled_borders 3                  #Border dashing (px)
+##
+##..: Colors :..
+##
+  default_color FFFFFF                #Default color
+  default_shade_color 333333          #Default color of shadows
+  default_outline_color black         #Default border color
+  #
+  color1 D6D6D6                       #Silver
+  color2 EFEFEF                       #Pearl white
+  color3 A3ADB0                       #Grey
+##
+##..: Misc :..
+##
+  short_units yes                     #Shortens units to a single character
+  pad_percents 2                      #Number of decimals
+##
+##..: Draw a background :..
+##-- SET TO YOUR PATH!!! --
+##
+  lua_load /home/ninquitassar/.conky/lua/draw_bg.lua
+  lua_draw_hook_pre draw_bg
+##
+##..: Text of conky :..
+##
+TEXT
+##
+##..: Todo.txt :..
+##-- List your todo by priority --
+##
+${color2}${voffset 5}${font Nimbus Mono L:size=9 style=bold}${alignc}TODO
+${color3}${font Nimbus Mono L:size=8 style=bold}${alignc}${execpi 600 cat $HOME/.todo/todo.txt | head -7 | sort}
+##
+##..: Separation line
+##
+${color3}${alignc}${cpubar cpu6 0, 200}
+##
+##..: Backup status :..
+##
+${color3}${alignc}${execpi 700 $HOME/.conky/scripts/backup_status}

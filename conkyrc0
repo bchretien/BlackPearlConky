@@ -1,0 +1,124 @@
+## Conky by Ninquitassar (2012)
+## my deviantart: http://ninquitassar.deviantart.com/
+## special thanks to Iacoporosso
+##..: Conky status :..
+##
+  total_run_times 0                   #Time in seconds; 0 = ever
+  background no                       #No fork in background
+##
+##..: System Settings :..
+##
+  cpu_avg_samples 1                   #The number of samples to average for CPU monitoring
+  net_avg_samples 2                   #The number of samples to average for net data 
+##
+##..: Memory :..
+##
+  double_buffer yes                   #eliminates flicker
+  no_buffers yes                      #Subtract (file system) buffers from used memory?
+  text_buffer_size 1024               #Textual buffer memory
+##
+##..: Display :..
+  out_to_console no                   #Print text to stdout
+  update_interval 1                   #Update interval
+##
+##..: Conky Window :..
+##
+  alignment top_right                 #Alignement
+  #
+  minimum_size 350                    #Minimum width (px)
+  maximum_width 350                   #Maximun width (px)
+  #
+  gap_x -1                            #Gap between left/right border
+  gap_y 60                            #Gap between upper/lower border
+  #
+  draw_shades no                      #Draw shadows?
+  draw_outline no                     #Draw outline?
+  draw_borders no                     #Borders to the text?
+  border_width 1                      #Width of borders
+  border_inner_margin 1               #Width of margins
+  #
+  own_window yes                      #Create own window to draw
+  own_window_type override            #Type of window
+  own_window_transparent yes          #Pseudo transparency
+##
+##..: Format :..
+##
+  use_xft yes                         #Use Xft
+  xftalpha .1                         #Alpha of Xft
+  override_utf8_locale yes            #UTF8 forcing
+  uppercase no                        #Only capital letters
+  use_spacer right                    #Adds spaces around certain objects to stop them from moving other things around
+  #
+  xftfont saxMono:size=9              #Default font
+  #
+  default_bar_size 82 3               #Specify a default width and height for bars
+  stippled_borders 3                  #Border dashing
+##
+##..: Colors :..
+##
+  default_color FFFFFF                #Default color
+  default_shade_color 333333          #Default color for shadows
+  default_outline_color black         #Default border color
+  #
+  color1 D6D6D6                       #Silver
+  color2 EFEFEF                       #Pearl white
+  color3 A3ADB0                       #Grey
+##
+##..: Misc :..
+##
+  short_units yes                       #Shortens units to a single character
+  pad_percents 2                        #Number of decimals
+##
+##..: Clock and rings :..
+##-- SET TO YOUR PATH!!! --
+##
+  lua_load ~/.conky/lua/clock.lua
+  lua_draw_hook_pre clock_rings
+
+
+TEXT
+# ..: CLOCK & CALENDAR :..
+${color d7d7d7}${offset 56}${voffset -1}${cpugraph cpu6 17,1}${voffset -3}${hr 2}${color3}
+
+${voffset -19}${offset 110}${font neuropol:size=20}${time %H:%M}${font}  ${voffset -3}${font Nimbus Mono L:size=9}$uptime
+${voffset -5}${offset 110}${cpubar cpu6 0, 200}${voffset 2}${color1}
+${font Nimbus Mono L:size=8 style=bold}${color2}${alignc} ${exec date +%B\ %Y | sed 's/^.\| [a-z]/\U&/g'}
+${offset 156}${color3}${execpi 60 JOUR=`date +%e`; cal | sed '1d' | sed 's/^/ /g' | sed /" $JOUR "/s/" $JOUR "/" "'${color 3273b5}'"$JOUR"'${color3}'" "/}
+
+
+#..: BATTERY :..
+${color d7d7d7}${offset 100}${voffset -8}${cpugraph cpu6 17,1}${voffset -3}${hr 2}${color3}
+${offset 150}${voffset -10} ${font neuropol:size=20}${battery_percent BAT0}%${font Nimbus Mono L:size=8 style=bold}  Battery
+${offset 160}${voffset -5}${cpubar cpu6 0, 150}${voffset 2}${color1}
+${offset 160}..:: ${acpiacadapter} ::..
+${battery_time BAT0}
+
+#..: CPU USAGE :..
+#--- if you use a multi-core system, change values ---
+#--- in this case, you may cange position of objects (offset, voffset) ---
+${color d7d7d7}${offset 150}${voffset 3}${cpugraph cpu6 17,1}${voffset -3}${hr 2}${color3}
+${offset 200}${voffset -7}${font neuropol:size=20}${cpu cpu1}% ${font Nimbus Mono L:size=8 style=bold}Cpu
+#${offset 200}${font neuropol:size=20}${cpu cpu2}% ${font Nimbus Mono L:size=8 style=bold}Cpu 
+${offset 200}${voffset -5}${cpubar cpu6 0, 110}${voffset 2}${color1}
+${offset 200}CpuT  ${execi 20 sensors | grep "high" | cut -d "+" -f2 | cut -c1-4 } °C
+#${offset 200}CpuT  ${execi 20 sensors | grep "100" | cut -d "+" -f2 | cut -c1-4 } °C
+
+
+#..: HARD DISK :..
+#--- correct to your partitions ---
+${color d7d7d7}${offset 100}${voffset 36}${cpugraph cpu6 17,1}${voffset -3}${hr 2}${color3}
+${offset 170}${font neuropol:size=20}$memperc% ${font Nimbus Mono L:size=8 style=bold} Ram
+${offset 170}${voffset -5}${cpubar cpu6 0, 110}${voffset 2}${color1}
+${offset 170}root   ${fs_free /} / ${fs_size /}
+${offset 170}var    ${fs_free /var} / ${fs_size /var}
+${offset 170}home   ${fs_free /home} / ${fs_size /home}
+${offset 170}tHD    ${hddtemp /dev/sda}°C
+
+
+
+
+
+
+
+
+

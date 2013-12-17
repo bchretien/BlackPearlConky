@@ -1,0 +1,131 @@
+## Conky by Ninquitassar (2012)
+## my deviantart: http://ninquitassar.deviantart.com/
+## special thanks to Iacoporosso
+##..: Conky status :..
+##
+  total_run_times 0                   #Time in seconds; 0 = ever
+  background no                       #No fork in background
+##
+##..: System Settings :..
+##
+  cpu_avg_samples 1                   #The number of samples to average for CPU monitoring
+  net_avg_samples 2                   #The number of samples to average for net data 
+##
+##..: Memory :..
+##
+  double_buffer yes                   #eliminates flicker
+  no_buffers yes                      #Subtract (file system) buffers from used memory?
+  text_buffer_size 1024               #Textual buffer memory
+##
+##..: Display :..
+  out_to_console no                   #Print text to stdout
+  update_interval 1                   #Update interval
+##
+##..: Conky Window :..
+##
+  alignment top_left                  #Alignement
+  #
+  minimum_size 500                    #Minimum width (px)
+  maximum_width 500                   #Maximum width(px)
+  #
+  gap_x -1                            #Gap between left/right border
+  gap_y 270                           #Gap between upper/lower border
+  #
+  draw_shades no                      #Draw shadows?
+  draw_outline no                     #Draw outline?
+  draw_borders no                     #Borders to the text?
+  border_width 1                      #Width of borders
+  border_inner_margin 1               #Width of margins
+  #
+  own_window yes                      #Create own window to draw
+  own_window_type override            #Type of window
+  own_window_transparent yes          #Pseudo transparency
+##
+##..: Format :..
+##
+  use_xft yes                         #Use Xft
+  xftalpha .1                         #Alpha of Xft
+  override_utf8_locale yes            #UTF8 forcing
+  uppercase no                        #Only capital letters
+  use_spacer right                    #Adds spaces around certain objects to stop them from moving other things around
+  #
+  xftfont saxMono:size=9              #Default font
+  #
+  default_bar_size 82 3               #Specify a default width and height for bars
+  stippled_borders 3                  #Border dashing
+##
+##..: Colors :..
+##
+  default_color FFFFFF                #Default color
+  default_shade_color 333333          #Default color for shadows
+  default_outline_color black         #Default border color
+  #
+  color1 D6D6D6                       #Silver
+  color2 EFEFEF                       #Pearl white
+  color3 A3ADB0                       #Grey
+##
+##..: Misc :..
+##
+  short_units yes                       #Shortens units to a single character
+  pad_percents 2                        #Number of decimals
+##
+##..: Clock and rings :..
+##-- SET TO YOUR PATH!!! --
+##
+  lua_load ~/.conky/lua/clock2.lua
+  lua_draw_hook_pre clock_rings
+
+
+TEXT
+${color d7d7d7}${voffset 3}${cpugraph cpu6 1,300}${voffset 1}${cpugraph cpu6 17,1}${color3}
+#
+#..: NET & MAIL :..
+#-- CORRECT GMAIL SCRIPT TO YOUR PATH
+#--- if you use another client, use conkyEmail (uncomment #)
+${offset 10}${voffset -10}${font neuropol:size=20}  ${execpi 60 python ~/.conky/scripts/gmail.py}${font Nimbus Mono L:size=8 style=bold}  mail(s)
+#${offset 10}  ${voffset -10}${font neuropol:size=20}  ${execi 300 conkyEmail --servertype=POP --servername=pop3.live.com --username=******** --password=******* --ssl}${font Nimbus Mono L:size=8 style=bold}  Gmail
+${offset 20}${voffset -5}${cpubar cpu6 0, 110}${voffset 2}${color1}
+${offset 10}${if_up wlan0}${color2} WiFi       Online $else ${color3}WiFi   Offline $endif
+${offset 10}${if_up eth0}${color2} Ethernet   Online $else ${color3}Eth0   Offline $endif
+${offset 17}${if_up wlan0}WiFi       ${wireless_link_qual_perc wlan0}% $else ${color3}WiFi   Offline $endif
+
+
+#..: NET TRAFFIC :..
+${color d7d7d7}${voffset 1}${cpugraph cpu6 1,200}${voffset 1}${cpugraph cpu6 17,1}${color3}
+${offset 15}${if_up eth0}${voffset -5}Dw ${font neuropol:size=20} ${voffset -8}${downspeed eth0}$else ${font Nimbus Mono L:size=8 style=bold}${voffset -5}Dw ${font neuropol:size=20} ${voffset -8}${downspeed wlan0}$endif${font Nimbus Mono L:size=8 style=bold}
+${offset 15}${if_up eth0}${voffset 6}Up ${font neuropol:size=20} ${voffset -7}${upspeed eth0}$else ${font Nimbus Mono L:size=8 style=bold}${voffset 6}Up ${font neuropol:size=20} ${voffset -7}${upspeed wlan0}$endif${font Nimbus Mono L:size=8 style=bold}
+${offset 20}${voffset -1}${cpubar cpu6 0, 110}${voffset 2}${color1}
+${offset 15}${if_up ppp0} tDown   ${totaldown ppp0}$else tDown   ${totaldown wlan0}$endif
+#
+#..: USB DEVICES :..
+#-- set for your use --
+${color d7d7d7}${voffset 11}${cpugraph cpu6 1,150}${voffset 1}${cpugraph cpu6 17,1}${color3}
+${offset 40}${voffset -10}USB Devices
+${offset 15}${voffset 7}${if_existing /dev/sdb1}${exec df -h | grep "sdb1" | cut -c48-70}   $else..:No Device:..$endif
+${offset 15}${voffset 7}${if_existing /dev/sdb2}${exec df -h | grep "sdb2" | cut -c48-70}   $else..:No Device:..$endif
+${offset 15}${voffset 7}${if_existing /dev/sdc1}${exec df -h | grep "sdc1" | cut -c48-70}   $else..:No Device:..$endif 
+${offset 15}${voffset 7}${if_existing /dev/sdd1}${exec df -h | grep "sdd1" | cut -c48-70}   $else $endif
+${offset 15}${voffset 7}${if_existing /dev/sde1}${exec df -h | grep "sde1" | cut -c48-70}   $else $endif  
+#
+#..: MUSIC :..
+#-- SETTINGS FOR MPD --
+#--- if you use Exaile, uncomment commented section and comment mpd one ---
+#--- if you use other player, search setting on google :P ---
+${color d7d7d7}${voffset -30}${cpugraph cpu6 1,300}${voffset 1}${cpugraph cpu6 17,1}${color3}
+${if_mpd_playing}${voffset -8}${offset 55}${voffset -2}${font neuropol:size=20}${mpd_elapsed}
+${offset 165}${voffset -27}${font neuropol:size=14}/ ${mpd_length}
+${offset 55}${color3}${cpubar cpu6 0, 190}${voffset 2}${font Nimbus Mono L:size=8 style=bold}
+${offset 55}${scroll 36 ${mpd_title}}
+${offset 55}${scroll 36 ${color 3273b5}${mpd_artist}}${color3}
+${offset 55}${scroll 36 ${mpd_album}}
+$else       ..:: MPD not running ::..
+#${if_running exaile}${voffset -8}${offset 55}${voffset -2}${font neuropol:size=20} ${exec conkyExaile --datatype=PT} ${voffset -5}${font PizzaDude Bullets:size=10}BBBBB${offset -65}${color 0778ec}${exec conkyExaile -n --datatype=RT --ratingchar=D}$color
+#${offset 55}${color3}${cpubar cpu6 0, 190}${voffset 2}${font Nimbus Mono L:size=8 style=bold}
+#${offset 55}${scroll 36 ${exec conkyExaile --datatype=TI}}
+#${offset 55}${scroll 36 ${exec conkyExaile --datatype=AR}}
+#${offset 55}${scroll 36 ${exec conkyExaile --datatype=AL}}
+#${else}       ..:: Exaile not running ::..
+
+$endif
+
+

@@ -1,0 +1,49 @@
+#! /bin/bash
+##
+##-- if you have an auto-backup system like this, watch backup status
+##---- CORRECT TO YOUR PATH !
+##---- to use this script to backup your datas, you need to install and configure
+##---- rsnapshot
+##
+#log=$HOME/.backup.log
+#today=`date "+%Y%m%d"`
+#
+#daily_timestamp=$HOME/.backup_daily_timestamp
+#last_daily_timestamp=`stat --format=%y $daily_timestamp | tr -d - | awk '{print $1}'`
+#
+#weekly_timestamp=$HOME/.backup_weekly_timestamp
+#last_weekly_backup=`stat --format=%y $weekly_timestamp | tr -d - | awk '{print $1}'`
+#
+#date >> $log
+#    exit 0;
+#
+# fi
+# echo "    1 day passed: start backup..." >> $log
+# if (( $today - $timestamp_weekly_backup >= 7 )); then
+#    echo "    7 days passed: start backup..." >> $log
+#    /usr/bin/rsnapshot weekly && touch $weekly_backup && echo "    WEEKLY done!" >> $log
+#
+# fi
+# /usr/bin/rsnapshot daily && touch $daily_backup && echo "    DAILY done!" >> $log
+##
+##
+today=`date "+%Y%m%d"`
+
+daily_timestamp=$HOME/.backup_daily_timestamp
+last_daily_backup=`stat --format=%y $daily_timestamp | tr -d - | awk '{print $1}'`
+
+weekly_timestamp=$HOME/.backup_weekly_timestamp
+last_weekly_backup=`stat --format=%y $weekly_timestamp | tr -d - | awk '{print $1}'`
+
+  if (( $today - $last_weekly_backup >= 7 )); then
+     echo "WARNING" && echo "Time to backup!"
+     exit 0;
+
+  fi
+  if (( $today <= $last_daily_backup )); then
+     echo "DAILY backup OK" && echo "WEEKLY backup OK"
+     exit 0;
+
+  fi
+  echo "Time to daily-BACKUP!" && echo "WEEKLY backup OK"
+  
